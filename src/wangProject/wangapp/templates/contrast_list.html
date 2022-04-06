@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="container">
+    <div style="margin-bottom: 10px" class="clearfix">
+        <a class="btn btn-primary" href="/contrast/add/">新建合同</a>
+        <div style="float: right;width: 300px">
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="自由职业者" value={{ search_value }}>
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Search</button>
+                            </span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        合同列表
+    </div>
+
+
+    <!-- Table -->
+    <table class="table table-bordered ">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>ContrastName</th>
+        <th>CustomerName</th>
+        <th>Staff</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>State</th>
+        <th>Operation</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in queryset %}
+        <tr>
+            <th scope="row">{{ obj.id }}</th>
+            <td>{{ obj.name }}</td>
+            <td>{{ obj.companyname}}</td>
+
+            <td>{{ obj.worker }}</td>
+            <td>{{ obj.start}}</td>
+            <td>{{ obj.end }}</td>
+            <td>{{ obj.get_state_display}}</td>
+
+            <td>
+                <a class="btn btn-danger btn-xs" href="/contrast/{{ obj.id }}/delete/">删除</a>
+            </td>
+
+        </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </nav>
+
+
+{% endblock %}
+

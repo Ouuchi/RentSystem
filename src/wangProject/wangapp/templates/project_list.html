@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="container">
+    <div style="margin-bottom: 10px" class="clearfix">
+        <a class="btn btn-primary" href="/project/add/">新建项目</a>
+        <div style="float: right;width: 300px">
+            <form method="get">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="项目类型" value={{ search_value }}>
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Search</button>
+                            </span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        项目列表
+    </div>
+
+
+    <!-- Table -->
+    <table class="table table-bordered ">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Project_name</th>
+        <th>type</th>
+        <th>Responsor</th>
+        <th>State</th>
+
+        <th>Operation</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in queryset %}
+        <tr>
+            <th scope="row">{{ obj.id }}</th>
+            <td>{{ obj.projectname}}</td>
+            <td>{{ obj.projecttype}}</td>
+            <td>{{ obj.responser }}</td>
+            <td>{{ obj.state }}</td>
+
+            <td>
+                <a class="btn btn-primary btn-xs" href="/project/{{ obj.id }}/edit/">编辑</a>
+                <a class="btn btn-danger btn-xs" href="/project/{{ obj.id }}/delete/">删除</a>
+            </td>
+
+        </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </nav>
+
+
+{% endblock %}
+
